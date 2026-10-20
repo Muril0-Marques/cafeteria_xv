@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria XV | Um lugar para apreciar</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho Principal (Padrão Idêntico em todas as páginas) -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio" aria-label="Página inicial da Cafeteria XV">
+                <span class="logo-xv">XV</span>
+                <span class="logo-text">Cafeteria</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Abrir menu de navegação"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="#inicio">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre a empresa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ambiente">Nosso espaço</a></li>
+                    <li class="nav-item"><a class="nav-link" href="produtos.html">Produtos</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pedidos.html">
+                            Pedidos
+                            <span class="nav-badge nav-badge-pedidos" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link nav-admin-link" href="administrativo.html" title="Acesso restrito para gerentes">Área Gerência</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Hero / Carrossel -->
+        <section id="inicio" class="hero">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <img src="../static/img/ambiente.jpg" class="d-block w-100" alt="Ambiente acolhedor da Cafeteria XV">
+                        <div class="hero-overlay"></div>
+                        <div class="carousel-caption hero-content">
+                            <span class="small-title">BEM-VINDO À</span>
+                            <h1>Cafeteria <span>XV</span></h1>
+                            <p>Um espaço feito para desacelerar, apreciar bons momentos e se sentir em casa.</p>
+
+                            <div class="hero-buttons">
+                                <a href="produtos.html" class="btn btn-cafeteria">Ver produtos</a>
+                                <a href="pedidos.html" class="btn btn-outline-cafeteria">Fazer pedido</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="../static/img/cafe.jpg" class="d-block w-100" alt="Grãos e café especial Cafeteria XV">
+                        <div class="hero-overlay"></div>
+                        <div class="carousel-caption hero-content">
+                            <span class="small-title">MAIS QUE UMA CAFETERIA</span>
+                            <h1>Momentos que ficam</h1>
+                            <p>Um ambiente pensado para encontros, conversas e momentos especiais com aromas inesquecíveis.</p>
+                            <div class="hero-buttons">
+                                <a href="produtos.html" class="btn btn-cafeteria">Nosso Cardápio</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="../static/img/mesa.jpg" class="d-block w-100" alt="Mesa aconchegante da Cafeteria XV">
+                        <div class="hero-overlay"></div>
+                        <div class="carousel-caption hero-content">
+                            <span class="small-title">SEU NOVO LUGAR FAVORITO</span>
+                            <h1>Sinta-se em casa.</h1>
+                            <p>Um ambiente acolhedor, moderno e pensado em cada detalhe para seu conforto e produtividade.</p>
+                            <div class="hero-buttons">
+                                <a href="template/sobre.html" class="btn btn-cafeteria">Conheça nossa história</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" aria-label="Slide anterior">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next" aria-label="Próximo slide">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Seção Sobre a Empresa (Introdução e Origem da Ideia) -->
+        <section id="sobre" class="sobre">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <span class="section-subtitle">SOBRE A CAFETERIA XV</span>
+                        <h2>Um lugar criado para <span>bons momentos.</span></h2>
+                        <p>A Cafeteria XV nasceu com a proposta de criar um espaço onde as pessoas pudessem aproveitar o tempo com tranquilidade, conforto e boas companhias, saboreando cafés especiais e delícias artesanais.</p>
+                        <p>Cada detalhe do nosso ambiente foi pensado para proporcionar uma experiência agradável: desde a iluminação suave até o aroma dos grãos moídos na hora em nossa tradicional Rua XV de Novembro.</p>
+                        <div class="d-flex flex-wrap gap-3 mt-4">
+                            <a href="sobre.html" class="btn btn-cafeteria">Página Sobre a Empresa</a>
+                            <a href="#historia" class="btn btn-outline-cafeteria">História do Café</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="sobre-imagem">
+                            <img src="../static/img/cafe.jpg" alt="Xícara de café especial da Cafeteria XV">
+                            <div class="sobre-card">
+                                <strong>XV</strong>
+                                <span>Desde o primeiro café, uma experiência especial e acolhedora.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Memorial sobre a História do Café (Requisito do Projeto) -->
+        <section id="historia" class="historia-cafe">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <span class="section-subtitle">MEMORIAL CULTURAL</span>
+                    <h2>A História do Café</h2>
+                    <p>Uma viagem centenária desde as montanhas africanas até a sua xícara na Cafeteria XV.</p>
+                </div>
+
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7">
+                        <div class="timeline-cafe">
+                            <div class="timeline-item">
+                                <span class="timeline-ano">Século IX • Etiópia</span>
+                                <h4>A Lenda de Kaldi e a Descoberta</h4>
+                                <p>Nas colinas de Kaffa, o pastor Kaldi notou a vitalidade incomum de suas cabras ao mastigarem frutos vermelhos silvestres. Os monges locais passaram a utilizar a infusão dos grãos para manterem-se alertas em vigílias de oração.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <span class="timeline-ano">Séculos XV - XVII • Arábia & Europa</span>
+                                <h4>A Rota dos Mercadores e as Casas de Café</h4>
+                                <p>Do porto de Moka no Iêmen, o café conquistou Constantinopla, Veneza, Paris e Londres. Surgiram as primeiras casas de café como centros de debates filosóficos, artes, negócios e trocas culturais.</p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <span class="timeline-ano">Século XVIII aos dias atuais • Brasil & Terceira Onda</span>
+                                <h4>Tradição Cafeeira e a Cafeteria XV</h4>
+                                <p>Introduzido em 1727, o Brasil tornou-se o maior produtor mundial. Hoje, celebramos a “Terceira Onda do Café”: microlotes selecionados 100% arábica, torra artesanal sob medida e respeito à sustentabilidade do produtor.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="historia-destaque-box">
+                            <span class="section-subtitle">NOSSO RITUAL</span>
+                            <h3>Do Grão à Xícara Perfeita</h3>
+                            <p>Na Cafeteria XV, valorizamos a pureza de cada variedade. Trabalhamos exclusivamente com grãos de altitude, torrados em pequenos lotes e extraídos na temperatura e moagem exatas para ressaltar notas de cacau, caramelo e frutas silvestres.</p>
+                            <p class="mb-4">Disponível em métodos filtrados (V60, Chemex, Prensa Francesa) e o clássico expresso italiano cremoso.</p>
+                            <a href="produtos.html" class="btn btn-dourado w-100">Experimente Nossos Cafés</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Nossos Diferenciais -->
+        <section class="diferenciais">
+            <div class="container">
+                <div class="text-center section-header">
+                    <span class="section-subtitle">NOSSA ESSÊNCIA</span>
+                    <h2>Feita para você.</h2>
+                    <p>Mais do que um lugar para passar, um espaço acolhedor para permanecer.</p>
+                </div>
+
+                <div class="row g-4 mt-3">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">☕</div>
+                            <h3>Experiência</h3>
+                            <p>Grãos nobres selecionados, métodos artesanais de extração e baristas apaixonados pelo ofício.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">♡</div>
+                            <h3>Acolhimento</h3>
+                            <p>Um espaço confortável, climatizado, com Wi-Fi veloz e atendimento atencioso no balcão e mesas.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">✦</div>
+                            <h3>Qualidade</h3>
+                            <p>Ingredientes frescos na confeitaria, pães artesanais assados no dia e embalagens térmicas para entrega.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Ambientes Internos (Balcão, 15 Mesas e Delivery) -->
+        <section id="ambiente" class="ambiente">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="ambiente-imagem">
+                            <img src="../static/img/ambiente.jpg" alt="Interior e mesas aconchegantes da Cafeteria XV">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="section-subtitle">NOSSO ESPAÇO</span>
+                        <h2>Um ambiente que <span>faz parte da experiência.</span></h2>
+                        <p>Madeira nobre, iluminação aconchegante e decoração contemporânea se encontram para criar um espaço confortável e convidativo.</p>
+                        <p>Com estrutura para atendimento rápido no <strong>balcão</strong>, um salão principal com <strong>15 mesas</strong> equipadas com tomadas para estudo e reuniões, além de um canal ágil de <strong>entrega delivery</strong>.</p>
+
+                        <div class="ambiente-info">
+                            <div>
+                                <strong>Ambientes Internos</strong>
+                                <span>Balcão, 15 mesas & Lounge</span>
+                            </div>
+                            <div>
+                                <strong>Formas de Atendimento</strong>
+                                <span>No local e Delivery</span>
+                            </div>
+                            <div>
+                                <strong>Horário de Funcionamento</strong>
+                                <span>Seg a Sáb: 08h às 20h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Chamada para Ação (CTA) -->
+        <section class="cta">
+            <div class="container text-center">
+                <span class="section-subtitle">CAFETERIA XV</span>
+                <h2>Seu momento começa aqui.</h2>
+                <p>Venha conhecer nosso espaço ou solicite suas delícias favoritas com entrega rápida ou retirada.</p>
+
+                <div class="cta-buttons">
+                    <a href="produtos.html" class="btn btn-cafeteria">Ver nosso cardápio</a>
+                    <a href="pedidos.html" class="btn btn-outline-cafeteria">Ver meu pedido</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Contato e Localização -->
+        <section id="contato" class="contato">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="contato-item">
+                            <span>📍</span>
+                            <h3>Localização</h3>
+                            <p>Rua XV de Novembro, 150<br>Centro Histórico</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="contato-item">
+                            <span>🕐</span>
+                            <h3>Horário</h3>
+                            <p>Segunda a sábado<br>08h às 20h</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="contato-item">
+                            <span>📱</span>
+                            <h3>Atendimento & Delivery</h3>
+                            <p>(11) 3456-7890 • @cafeteriaxv<br>Pedidos online no balcão ou entrega</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé Principal (Idêntico em todas as páginas) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Cafeteria XV</h3>
+                    <p>Um espaço para apreciar, conversar e saborear grãos nobres com torra artesanal e confeitaria fina.</p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#inicio">Início</a>
+                    <a href="sobre.html">Sobre a empresa</a>
+                    <a href="#ambiente">Espaço</a>
+                    <a href="produtos.html">Produtos</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="#contato">Contato</a>
+                    <a href="administrativo.html" class="text-warning">Gerência</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Cafeteria XV. Todos os direitos reservados.</span>
+                <span>Front-end estruturado para futura integração com Spring Boot, Thymeleaf e MySQL.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap e Lógica Central -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

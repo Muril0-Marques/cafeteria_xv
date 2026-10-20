@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos & Atendimento | Cafeteria XV</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho Principal (Padrão Idêntico em todas as páginas) -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../static/css/style.css" aria-label="Página inicial da Cafeteria XV">
+                <span class="logo-xv">XV</span>
+                <span class="logo-text">Cafeteria</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Abrir menu de navegação"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre a empresa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#ambiente">Nosso espaço</a></li>
+                    <li class="nav-item"><a class="nav-link" href="produtos.html">Produtos</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pedidos.html">
+                            Pedidos
+                            <span class="nav-badge nav-badge-pedidos" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link nav-admin-link" href="administrativo.html" title="Acesso restrito para gerentes">Área Gerência</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina-pedidos">
+        <div class="container">
+
+            <!-- Barra de Identificação do Cliente Autenticado (Requisito da Regra de Negócio) -->
+            <div class="cliente-bar">
+                <div class="cliente-info-wrapper">
+                    <div class="cliente-avatar" id="cliente-avatar-display">M</div>
+                    <div class="cliente-detalhes">
+                        <h4 id="cliente-nome-display">Mariana Silva</h4>
+                        <span id="cliente-email-display">mariana.silva@exemplo.com</span>
+                    </div>
+                    <span class="cliente-badge-aviso d-none d-md-inline-block">
+                        Demonstração Front-end • Provisório
+                    </span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn-sair-cliente" id="btn-sair-cliente" title="Simular saída do sistema">
+                        Sair da Conta
+                    </button>
+                    <button type="button" class="btn btn-sm btn-dourado" id="btn-entrar-cliente" style="display: none;">
+                        Fazer Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Título da Página de Pedidos -->
+            <div class="cabecalho-produtos mb-4 text-start">
+                <span class="section-subtitle">ÁREA DO CLIENTE</span>
+                <h1>Registro & Acompanhamento de Pedido</h1>
+                <p>
+                    Confira seus produtos selecionados, escolha o tipo de atendimento (balcão, mesa ou entrega) e conclua a solicitação.
+                </p>
+            </div>
+
+            <form id="form-finalizar-pedido">
+                <div class="row g-4">
+
+                    <!-- Coluna Esquerda: Tipo de Atendimento, Itens e Dados de Entrega -->
+                    <div class="col-lg-7">
+
+                        <!-- CRITÉRIO ESSENCIAL: Balcão, Mesas (15) ou Entrega -->
+                        <div class="box-secao">
+                            <h3><span>📍</span> 1. Onde você deseja ser atendido?</h3>
+                            <p class="small text-muted mb-3">
+                                Selecione como deseja receber seus produtos da Cafeteria XV:
+                            </p>
+
+                            <div class="tipos-atendimento-grid">
+                                <!-- Opção Balcão -->
+                                <div class="tipo-card selecionado" data-tipo="balcao">
+                                    <div class="tipo-icone">☕</div>
+                                    <div class="tipo-titulo">Balcão</div>
+                                    <div class="tipo-desc">Retirada rápida direta no balcão principal da cafeteria.</div>
+                                </div>
+
+                                <!-- Opção Mesa no Salão (15 Mesas) -->
+                                <div class="tipo-card" data-tipo="mesa">
+                                    <div class="tipo-icone">🪑</div>
+                                    <div class="tipo-titulo">Mesa no Salão</div>
+                                    <div class="tipo-desc">Consumo no local em uma de nossas 15 mesas aconchegantes.</div>
+                                </div>
+
+                                <!-- Opção Entrega / Delivery -->
+                                <div class="tipo-card" data-tipo="entrega">
+                                    <div class="tipo-icone">🛵</div>
+                                    <div class="tipo-titulo">Entrega (Delivery)</div>
+                                    <div class="tipo-desc">Receba quentinho no seu endereço em embalagens especiais.</div>
+                                </div>
+                            </div>
+
+                            <!-- Painel Condicional: Seleção das 15 Mesas -->
+                            <div id="painel-mesas" class="painel-mesas">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="text-dark small">Escolha sua mesa no salão (15 mesas disponíveis):</strong>
+                                    <span id="mesa-selecionada-display" class="badge bg-warning text-dark">Nenhuma mesa selecionada</span>
+                                </div>
+
+                                <div class="mesas-grid">
+                                    <button type="button" class="btn-mesa" data-mesa="01">Mesa 01</button>
+                                    <button type="button" class="btn-mesa" data-mesa="02">Mesa 02</button>
+                                    <button type="button" class="btn-mesa" data-mesa="03">Mesa 03</button>
+                                    <button type="button" class="btn-mesa" data-mesa="04">Mesa 04</button>
+                                    <button type="button" class="btn-mesa" data-mesa="05">Mesa 05</button>
+                                    <button type="button" class="btn-mesa" data-mesa="06">Mesa 06</button>
+                                    <button type="button" class="btn-mesa" data-mesa="07">Mesa 07</button>
+                                    <button type="button" class="btn-mesa" data-mesa="08">Mesa 08</button>
+                                    <button type="button" class="btn-mesa" data-mesa="09">Mesa 09</button>
+                                    <button type="button" class="btn-mesa" data-mesa="10">Mesa 10</button>
+                                    <button type="button" class="btn-mesa" data-mesa="11">Mesa 11</button>
+                                    <button type="button" class="btn-mesa" data-mesa="12">Mesa 12</button>
+                                    <button type="button" class="btn-mesa" data-mesa="13">Mesa 13</button>
+                                    <button type="button" class="btn-mesa" data-mesa="14">Mesa 14</button>
+                                    <button type="button" class="btn-mesa" data-mesa="15">Mesa 15</button>
+                                </div>
+                                <div class="form-text small mt-2">
+                                    O número da mesa encontra-se no totem de madeira de cada mesa do salão.
+                                </div>
+                            </div>
+
+                            <!-- Painel Condicional: Formulário de Endereço para Entrega -->
+                            <div id="painel-entrega" class="painel-entrega">
+                                <strong class="text-dark small d-block mb-3">Dados de entrega em domicílio (Taxa fixa de R$ 7,00):</strong>
+                                <div class="row g-2">
+                                    <div class="col-md-8">
+                                        <label for="entrega-rua" class="form-label small fw-semibold">Rua / Avenida *</label>
+                                        <input type="text" class="form-control form-control-sm" id="entrega-rua" placeholder="Ex: Rua XV de Novembro">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="entrega-numero" class="form-label small fw-semibold">Número *</label>
+                                        <input type="text" class="form-control form-control-sm" id="entrega-numero" placeholder="Ex: 250">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="entrega-bairro" class="form-label small fw-semibold">Bairro *</label>
+                                        <input type="text" class="form-control form-control-sm" id="entrega-bairro" placeholder="Ex: Centro">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="entrega-cep" class="form-label small fw-semibold">CEP</label>
+                                        <input type="text" class="form-control form-control-sm" id="entrega-cep" placeholder="00000-000">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="entrega-complemento" class="form-label small fw-semibold">Complemento / Ponto de Referência</label>
+                                        <input type="text" class="form-control form-control-sm" id="entrega-complemento" placeholder="Apto, Bloco, portaria...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Itens do Pedido Selecionados -->
+                        <div class="box-secao">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="mb-0"><span>☕</span> 2. Itens do seu Pedido</h3>
+                                <a href="produtos.html" class="btn btn-sm btn-outline-cafeteria">+ Adicionar Mais Itens</a>
+                            </div>
+
+                            <!-- Lista dinâmica de produtos no pedido -->
+                            <div id="lista-itens-pedido"></div>
+
+                            <!-- Estado quando não há produtos no carrinho -->
+                            <div id="carrinho-vazio-card" class="carrinho-vazio" style="display: none;">
+                                <div class="carrinho-vazio-icone">🛒</div>
+                                <h4>Seu pedido está vazio no momento</h4>
+                                <p>Explore nossos cafés artesanais, pães quentinhos e sobremesas finas no cardápio!</p>
+                                <a href="produtos.html" class="btn btn-cafeteria">Ver Cardápio Completo</a>
+                            </div>
+                        </div>
+
+                        <!-- Observações e Pagamento -->
+                        <div class="box-secao">
+                            <h3><span>📝</span> 3. Observações & Forma de Pagamento</h3>
+
+                            <div class="mb-3">
+                                <label for="pedido-observacoes" class="form-label small fw-semibold">Observações para a cozinha / barista:</label>
+                                <textarea id="pedido-observacoes" class="form-control" rows="2" placeholder="Ex: Café com pouco açúcar; leite de amêndoas; sem canela no cappuccino..."></textarea>
+                            </div>
+
+                            <label class="form-label small fw-semibold d-block mb-2">Forma de pagamento desejada:</label>
+                            <div class="d-flex flex-wrap gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="forma-pagamento" id="pgto-cartao" value="Cartão Débito/Crédito" checked>
+                                    <label class="form-check-label small" for="pgto-cartao">Cartão Débito/Crédito</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="forma-pagamento" id="pgto-pix" value="Pix Instantâneo">
+                                    <label class="form-check-label small" for="pgto-pix">Pix Instantâneo</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="forma-pagamento" id="pgto-dinheiro" value="Dinheiro">
+                                    <label class="form-check-label small" for="pgto-dinheiro">Dinheiro</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Resumo Financeiro e Histórico Recente -->
+                    <div class="col-lg-5">
+
+                        <!-- Resumo Financeiro -->
+                        <div id="resumo-pedido-container" class="resumo-card mb-4 sticky-top" style="top: 100px; z-index: 10;">
+                            <h3 class="font-serif mb-3 text-dark">Resumo do Pedido</h3>
+
+                            <div class="resumo-linha">
+                                <span>Subtotal dos produtos</span>
+                                <strong id="resumo-subtotal">R$ 0,00</strong>
+                            </div>
+
+                            <div class="resumo-linha">
+                                <span>Taxa de atendimento/entrega</span>
+                                <strong id="resumo-taxa-entrega">Grátis</strong>
+                            </div>
+
+                            <div class="resumo-linha total">
+                                <span>Valor Total</span>
+                                <strong id="resumo-total-geral">R$ 0,00</strong>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-dourado w-100 py-3 fs-6">
+                                    ✓ Confirmar e Enviar Pedido
+                                </button>
+                                <button type="button" class="btn btn-sm btn-link text-danger w-100 mt-2" onclick="limparPedidoAtivo()">
+                                    Esvaziar pedido
+                                </button>
+                            </div>
+
+                            <div class="alert alert-light border small text-muted mt-3 mb-0">
+                                <strong>ℹ️ Nota Acadêmica:</strong> Esta página opera em simulação de front-end. O fluxo real de autenticação e gravação em banco MySQL será conectado no IntelliJ com Spring Boot.
+                            </div>
+                        </div>
+
+                        <!-- Acompanhamento de Pedidos do Cliente (Requisito do PDF) -->
+                        <div class="box-secao mt-4">
+                            <h4 class="font-serif text-dark mb-3">🕒 Meus Pedidos Recentes</h4>
+                            <p class="small text-muted mb-3">
+                                Acompanhe o status dos pedidos solicitados em sua conta:
+                            </p>
+                            <div id="historico-pedidos-cliente"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </main>
+
+    <!-- Modal de Confirmação de Pedido -->
+    <div class="modal fade" id="modal-pedido-confirmado" tabindex="-1" aria-labelledby="modalConfirmadoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-dark text-white border-bottom border-warning">
+                    <h5 class="modal-title font-serif" id="modalConfirmadoLabel">🎉 Pedido Registrado com Sucesso!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <div class="fs-1 text-warning mb-2">☕</div>
+                    <h4 class="font-serif text-dark mb-1">Pedido <span id="modal-pedido-numero" class="text-primary">#1001</span></h4>
+                    <p class="text-muted small mb-4">Seu pedido foi recebido pela equipe da Cafeteria XV e entrou em atendimento!</p>
+
+                    <div class="p-3 bg-light rounded text-start small mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Local de atendimento:</span>
+                            <strong id="modal-pedido-atendimento" class="text-dark">Balcão</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Tempo estimado de preparo:</span>
+                            <strong id="modal-pedido-tempo" class="text-dark">10 a 15 minutos</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-top pt-1 mt-2">
+                            <span class="fw-bold text-dark">Valor total:</span>
+                            <strong id="modal-pedido-total" class="text-success fs-6">R$ 0,00</strong>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info small py-2">
+                        Você pode acompanhar o preparo na seção <strong>Meus Pedidos Recentes</strong> abaixo.
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button type="button" class="btn btn-cafeteria" data-bs-dismiss="modal">Entendido, Voltar</button>
+                    <a href="produtos.html" class="btn btn-outline-cafeteria">Fazer Outro Pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé Principal (Idêntico em todas as páginas) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Cafeteria XV</h3>
+                    <p>
+                        Um espaço para apreciar, conversar e saborear grãos nobres com torra artesanal e confeitaria fina.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="index.html">Início</a>
+                    <a href="sobre.html">Sobre a empresa</a>
+                    <a href="../index.html#ambiente">Espaço</a>
+                    <a href="produtos.html">Produtos</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="../index.html#contato">Contato</a>
+                    <a href="administrativo.html" class="text-warning">Gerência</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Cafeteria XV. Todos os direitos reservados.</span>
+                <span>Front-end estruturado para futura integração com Spring Boot, Thymeleaf e MySQL.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap e Lógica Central -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

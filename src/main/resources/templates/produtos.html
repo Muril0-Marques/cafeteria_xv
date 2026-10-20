@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital | Cafeteria XV</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho Principal (Padrão Idêntico em todas as páginas) -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../templates/index.html" aria-label="Página inicial da Cafeteria XV">
+                <span class="logo-xv">XV</span>
+                <span class="logo-text">Cafeteria</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Abrir menu de navegação"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre a empresa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#ambiente">Nosso espaço</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="produtos.html">Produtos</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pedidos.html">
+                            Pedidos
+                            <span class="nav-badge nav-badge-pedidos" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link nav-admin-link" href="administrativo.html" title="Acesso restrito para gerentes">Área Gerência</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina-produtos">
+        <div class="container">
+
+            <div class="cabecalho-produtos text-center">
+                <span class="section-subtitle">CARDÁPIO COMPLETO</span>
+                <h1>Produtos da Cafeteria XV</h1>
+                <p>
+                    Escolha seus itens favoritos para consumo imediato no <strong>balcão</strong>, atendimento em uma das nossas <strong>15 mesas</strong> ou para <strong>entrega (delivery)</strong>.
+                </p>
+            </div>
+
+            <!-- Filtros de Categorias (Conforme Grupos do Anexo I do PDF) -->
+            <div class="filtros-container">
+                <button type="button" class="btn-filtro active" data-categoria="todos">Todos (21)</button>
+                <button type="button" class="btn-filtro" data-categoria="bebidas-quentes">☕ Bebidas Quentes</button>
+                <button type="button" class="btn-filtro" data-categoria="bebidas-geladas">🧊 Bebidas Geladas</button>
+                <button type="button" class="btn-filtro" data-categoria="padaria">🥐 Padaria e Confeitaria</button>
+                <button type="button" class="btn-filtro" data-categoria="lanches">🥪 Lanches Salgados</button>
+                <button type="button" class="btn-filtro" data-categoria="sobremesas">🍰 Sobremesas</button>
+                <button type="button" class="btn-filtro" data-categoria="saudaveis">🥗 Opções Saudáveis</button>
+                <button type="button" class="btn-filtro" data-categoria="venda">🛍️ Produtos para Venda</button>
+            </div>
+
+            <!-- Barra de Busca em Tempo Real -->
+            <div class="pesquisa-wrapper">
+                <span class="pesquisa-icone">🔍</span>
+                <input type="text" id="pesquisa-produto" placeholder="Buscar por produto, café, doce ou salgado..." aria-label="Buscar produtos">
+            </div>
+
+            <!-- Toast de Feedback Visual -->
+            <div id="mensagem-pedido" class="mensagem-pedido" role="alert"></div>
+
+            <!-- Grid de Produtos (3 itens de cada um dos 7 grupos do Anexo I = 21 produtos) -->
+            <div class="row g-4" id="grid-produtos">
+
+                <!-- GRUPO 1: BEBIDAS QUENTES -->
+                <!-- 1. Café Expresso -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-quentes">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cafepreto.jpg" alt="Xícara de Café Expresso Cafeteria XV">
+                            <span class="badge-categoria">Bebidas Quentes</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Café Expresso</h2>
+                            <p>Café tradicional, forte e aromático, extraído sob pressão com crema aveludada e notas achocolatadas.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 6,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Café Expresso">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="1"
+                                    data-nome="Café Expresso"
+                                    data-preco="6.00"
+                                    data-imagem="../img/cafepreto.jpg"
+                                    data-categoria="Bebidas Quentes"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Cappuccino Italiano -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-quentes">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cappuccino.jpg" alt="Cappuccino Italiano com canela">
+                            <span class="badge-categoria">Bebidas Quentes</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Cappuccino Italiano</h2>
+                            <p>Equilíbrio clássico entre café expresso especial, leite vaporizado e espuma cremosa polvilhada com cacau 100%.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 12,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Cappuccino Italiano">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="2"
+                                    data-nome="Cappuccino Italiano"
+                                    data-preco="12.00"
+                                    data-imagem="../img/cappuccino.jpg"
+                                    data-categoria="Bebidas Quentes"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Mocaccino / Café Mocha -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-quentes">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/CaffeMocha.JPG" alt="Café Mocha especial">
+                            <span class="badge-categoria">Bebidas Quentes</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Mocaccino Especial</h2>
+                            <p>Combinação sofisticada de calda artesanal de chocolate meio amargo, dose dupla de expresso e leite cremoso.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 14,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Mocaccino Especial">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="3"
+                                    data-nome="Mocaccino Especial"
+                                    data-preco="14.00"
+                                    data-imagem="../img/CaffeMocha.JPG"
+                                    data-categoria="Bebidas Quentes"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 2: BEBIDAS GELADAS -->
+                <!-- 4. Café Gelado (Iced Coffee) -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-geladas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cafe.jpg" alt="Café gelado Iced Coffee">
+                            <span class="badge-categoria">Bebidas Geladas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Café Gelado (Iced Coffee)</h2>
+                            <p>Expresso duplo gelado batido com cubos de gelo aromatizados com café e um toque suave de baunilha.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 13,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Café Gelado">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="4"
+                                    data-nome="Café Gelado (Iced Coffee)"
+                                    data-preco="13.00"
+                                    data-imagem="../img/cafe.jpg"
+                                    data-categoria="Bebidas Geladas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Cold Brew Tradicional -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-geladas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cafeleite.jpg" alt="Cold Brew artesanal">
+                            <span class="badge-categoria">Bebidas Geladas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Cold Brew Tradicional</h2>
+                            <p>Infusão a frio de grãos arábica por 18 horas contínuas. Resultado incrivelmente suave, refrescante e sem amargor.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 15,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Cold Brew">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="5"
+                                    data-nome="Cold Brew Tradicional"
+                                    data-preco="15.00"
+                                    data-imagem="../img/cafeleite.jpg"
+                                    data-categoria="Bebidas Geladas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Frappé de Chocolate -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="bebidas-geladas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/chocolatequente.jpg" alt="Frappé cremoso de chocolate">
+                            <span class="badge-categoria">Bebidas Geladas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Frappé de Chocolate</h2>
+                            <p>Bebida gelada batida com café expresso, ganache de chocolate, leite integral gelado e cobertura de chantilly caseiro.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 16,50</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Frappé">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="6"
+                                    data-nome="Frappé de Chocolate"
+                                    data-preco="16.50"
+                                    data-imagem="../img/chocolatequente.jpg"
+                                    data-categoria="Bebidas Geladas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 3: PADARIA E CONFEITARIA -->
+                <!-- 7. Pão de Queijo Mineiro -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="padaria">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/paoqueijo.jpg" alt="Porção de Pão de Queijo Mineiro">
+                            <span class="badge-categoria">Padaria</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Pão de Queijo Mineiro</h2>
+                            <p>Porção com 6 unidades quentinhas, feitas com polvilho artesanal e queijo da Canastra meia cura. Casquinha crocante.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 9,50</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Pão de Queijo">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="7"
+                                    data-nome="Pão de Queijo Mineiro"
+                                    data-preco="9.50"
+                                    data-imagem="../img/paoqueijo.jpg"
+                                    data-categoria="Padaria e Confeitaria"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Croissant Francês Manteiga -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="padaria">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/croissants.jpg" alt="Croissant Francês Folhado">
+                            <span class="badge-categoria">Padaria</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Croissant Francês Manteiga</h2>
+                            <p>Autêntica receita francesa com dobras folhadas, crocante por fora e macio por dentro com manteiga de primeira linha.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 10,50</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Croissant">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="8"
+                                    data-nome="Croissant Francês Manteiga"
+                                    data-preco="10.50"
+                                    data-imagem="../img/croissants.jpg"
+                                    data-categoria="Padaria e Confeitaria"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Bolo de Chocolate Artesanal -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="padaria">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/bolodechocolate.jpg" alt="Fatia de bolo de chocolate artesanal">
+                            <span class="badge-categoria">Confeitaria</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Bolo de Chocolate Artesanal</h2>
+                            <p>Fatia generosa de bolo fofinho feito com cacau nobre e coberto por generosa camada cremosa de brigadeiro gourmet.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 12,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Bolo de Chocolate">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="9"
+                                    data-nome="Bolo de Chocolate Artesanal"
+                                    data-preco="12.00"
+                                    data-imagem="../img/bolodechocolate.jpg"
+                                    data-categoria="Padaria e Confeitaria"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 4: LANCHES SALGADOS -->
+                <!-- 10. Sanduíche Natural de Frango -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="lanches">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/sanduiche.jpg" alt="Sanduíche natural de frango">
+                            <span class="badge-categoria">Lanches Salgados</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Sanduíche Natural de Frango</h2>
+                            <p>Pão artesanal de fermentação lenta com frango desfiado temperado com ervas finas, creme de ricota, cenoura e folhas frescas.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 18,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Sanduíche Natural">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="10"
+                                    data-nome="Sanduíche Natural de Frango"
+                                    data-preco="18.00"
+                                    data-imagem="../img/sanduiche.jpg"
+                                    data-categoria="Lanches Salgados"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Misto Quente Especial XV -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="lanches">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/sanduiche.jpg" alt="Misto quente no pão artesanal">
+                            <span class="badge-categoria">Lanches Salgados</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Misto Quente Especial XV</h2>
+                            <p>Tostado na manteiga de garrafa no pão brioche, com queijo prato derretido, presunto royale e toque de orégano fresco.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 14,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Misto Quente">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="11"
+                                    data-nome="Misto Quente Especial XV"
+                                    data-preco="14.00"
+                                    data-imagem="../img/sanduiche.jpg"
+                                    data-categoria="Lanches Salgados"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Quiche Lorraine -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="lanches">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/croissants.jpg" alt="Quiche salgada individual">
+                            <span class="badge-categoria">Lanches Salgados</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Quiche Lorraine Clássica</h2>
+                            <p>Fatia individual de quiche com massa podre crocante amanteigada, recheio aveludado de bacon defumado e queijo gruyère.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 16,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Quiche Lorraine">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="12"
+                                    data-nome="Quiche Lorraine Clássica"
+                                    data-preco="16.00"
+                                    data-imagem="../img/croissants.jpg"
+                                    data-categoria="Lanches Salgados"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 5: SOBREMESAS -->
+                <!-- 13. Cheesecake de Frutas Vermelhas -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="sobremesas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/Cheesecake.jpg" alt="Cheesecake com frutas vermelhas">
+                            <span class="badge-categoria">Sobremesas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Cheesecake de Frutas Vermelhas</h2>
+                            <p>Sobremesa clássica de massa crocante de biscoito, recheio denso de cream cheese e cobertura de amora, mirtilo e framboesa.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 16,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Cheesecake">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="13"
+                                    data-nome="Cheesecake de Frutas Vermelhas"
+                                    data-preco="16.00"
+                                    data-imagem="../img/Cheesecake.jpg"
+                                    data-categoria="Sobremesas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. Tiramisù Clássico Italiano -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="sobremesas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/sobremesa.jpg" alt="Tiramisù italiano da casa">
+                            <span class="badge-categoria">Sobremesas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Tiramisù Clássico Italiano</h2>
+                            <p>Autêntica sobremesa italiana com biscoitos champagne embebidos em café expresso Cafeteria XV, creme mascarpone e cacau puro.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 17,50</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Tiramisù">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="14"
+                                    data-nome="Tiramisù Clássico Italiano"
+                                    data-preco="17.50"
+                                    data-imagem="../img/sobremesa.jpg"
+                                    data-categoria="Sobremesas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Petit Gâteau com Sorvete -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="sobremesas">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/bolodechocolate.jpg" alt="Petit Gâteau quente com recheio cremoso">
+                            <span class="badge-categoria">Sobremesas</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Petit Gâteau com Sorvete</h2>
+                            <p>Bolinho quente com coração fluído de chocolate belga, acompanhado de bola de sorvete artesanal de fava de baunilha.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 19,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Petit Gâteau">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="15"
+                                    data-nome="Petit Gâteau com Sorvete"
+                                    data-preco="19.00"
+                                    data-imagem="../img/bolodechocolate.jpg"
+                                    data-categoria="Sobremesas"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 6: OPÇÕES SAUDÁVEIS -->
+                <!-- 16. Salada de Frutas Frescas -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="saudaveis">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/sobremesa.jpg" alt="Salada de frutas frescas da estação">
+                            <span class="badge-categoria">Saudáveis</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Salada de Frutas com Mel</h2>
+                            <p>Tigela com frutas selecionadas cortadas na hora: morangos, kiwi, manga, abacaxi e banana, acompanhada de mel silvestre puro.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 12,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Salada de Frutas">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="16"
+                                    data-nome="Salada de Frutas com Mel"
+                                    data-preco="12.00"
+                                    data-imagem="../img/sobremesa.jpg"
+                                    data-categoria="Opções Saudáveis"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 17. Iogurte com Granola Artesanal -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="saudaveis">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/Cheesecake.jpg" alt="Iogurte com granola e frutas">
+                            <span class="badge-categoria">Saudáveis</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Iogurte com Granola Artesanal</h2>
+                            <p>Iogurte grego natural sem açúcar, servido com mix crocante de castanhas de caju, aveia, sementes e geleia de frutas vermelhas.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 13,50</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Iogurte com Granola">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="17"
+                                    data-nome="Iogurte com Granola Artesanal"
+                                    data-preco="13.50"
+                                    data-imagem="../img/Cheesecake.jpg"
+                                    data-categoria="Opções Saudáveis"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 18. Sanduíche Integral Veggie -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="saudaveis">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/sanduiche.jpg" alt="Sanduíche integral veggie">
+                            <span class="badge-categoria">Saudáveis</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Sanduíche Integral Veggie</h2>
+                            <p>Pão 100% integral com grãos, pasta de homus caseira, abobrinha grelhada, tomate seco, rúcula e azeite de oliva extravirgem.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 17,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Sanduíche Integral">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="18"
+                                    data-nome="Sanduíche Integral Veggie"
+                                    data-preco="17.00"
+                                    data-imagem="../img/sanduiche.jpg"
+                                    data-categoria="Opções Saudáveis"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRUPO 7: PRODUTOS PARA VENDA -->
+                <!-- 19. Grãos de Café Especiais 250g -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="venda">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cafe.jpg" alt="Pacote de grãos de café especiais 250g">
+                            <span class="badge-categoria">Para Venda</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Grãos de Café Especial 250g</h2>
+                            <p>Pacote com grãos 100% arábica de torra média artesanal. Variedade Catuaí Vermelho da Alta Mogiana. Notas de mel e chocolate.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 38,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Café Especial">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="19"
+                                    data-nome="Grãos de Café Especial 250g"
+                                    data-preco="38.00"
+                                    data-imagem="../img/cafe.jpg"
+                                    data-categoria="Produtos para Venda"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 20. Café Moído Artesanal 250g -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="venda">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/cafepreto.jpg" alt="Café moído na hora da Cafeteria XV">
+                            <span class="badge-categoria">Para Venda</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Café Moído na Hora 250g</h2>
+                            <p>Grãos moídos no momento do pedido na granulação ideal para o seu método caseiro: cafeteira italiana, filtro de papel ou prensa francesa.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 34,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Café Moído">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="20"
+                                    data-nome="Café Moído na Hora 250g"
+                                    data-preco="34.00"
+                                    data-imagem="../img/cafepreto.jpg"
+                                    data-categoria="Produtos para Venda"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 21. Caneca Cerâmica Personalizada XV -->
+                <div class="col-md-6 col-lg-4 col-produto" data-categoria="venda">
+                    <div class="produto-card">
+                        <div class="produto-imagem-wrapper">
+                            <img src="../static/img/mesa.jpg" alt="Caneca cerâmica Cafeteria XV">
+                            <span class="badge-categoria">Para Venda</span>
+                        </div>
+                        <div class="produto-info">
+                            <h2>Caneca Cerâmica XV (350ml)</h2>
+                            <p>Caneca de cerâmica artesanal de alta retenção térmica, com acabamento fosco marrom café e o brasão oficial Cafeteria XV em dourado.</p>
+                            <div class="produto-preco">
+                                <span class="text-muted small">Valor unitário:</span>
+                                <strong>R$ 32,00</strong>
+                            </div>
+                            <div class="produto-acoes">
+                                <div class="controle-quantidade">
+                                    <button type="button" class="btn-qtd-menos" title="Diminuir quantidade">−</button>
+                                    <input type="text" readonly value="1" class="quantidade-produto" aria-label="Quantidade de Caneca Personalizada">
+                                    <button type="button" class="btn-qtd-mais" title="Aumentar quantidade">+</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-adicionar"
+                                    data-id="21"
+                                    data-nome="Caneca Cerâmica XV (350ml)"
+                                    data-preco="32.00"
+                                    data-imagem="../img/mesa.jpg"
+                                    data-categoria="Produtos para Venda"
+                                >
+                                    + Adicionar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Alerta para nenhum item encontrado na busca -->
+            <div id="sem-produtos-encontrados" class="text-center py-5" style="display: none;">
+                <h4 class="text-muted">Nenhum produto encontrado</h4>
+                <p class="text-secondary">Tente buscar por outro termo ou selecione a categoria "Todos".</p>
+            </div>
+
+            <!-- Botão Centralizado para ir aos Pedidos -->
+            <div class="text-center mt-5">
+                <a href="pedidos.html" class="btn btn-cafeteria btn-lg px-4">
+                    🛒 Visualizar Meu Pedido e Finalizar
+                </a>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante Rápido com Contador de Itens no Carrinho -->
+        <div id="carrinho-flutuante" class="carrinho-flutuante" style="display: none;">
+            <a href="pedidos.html" class="btn-carrinho-flutuante" title="Ir para a página de pedidos">
+                <span>🛒 Meu Pedido</span>
+                <span id="carrinho-badge-flutuante" class="carrinho-badge-flutuante">0</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Rodapé Principal (Idêntico em todas as páginas) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Cafeteria XV</h3>
+                    <p>
+                        Um espaço para apreciar, conversar e saborear grãos nobres com torra artesanal e confeitaria fina.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="../index.html">Início</a>
+                    <a href="sobre.html">Sobre a empresa</a>
+                    <a href="../index.html#ambiente">Espaço</a>
+                    <a href="produtos.html">Produtos</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="../index.html#contato">Contato</a>
+                    <a href="administrativo.html" class="text-warning">Gerência</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Cafeteria XV. Todos os direitos reservados.</span>
+                <span>Front-end estruturado para futura integração com Spring Boot, Thymeleaf e MySQL.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap e Lógica Central -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

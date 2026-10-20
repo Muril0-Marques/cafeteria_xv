@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Cafeteria XV</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho Principal (Padrão Idêntico em todas as páginas) -->
+    <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html" aria-label="Página inicial da Cafeteria XV">
+                <span class="logo-xv">XV</span>
+                <span class="logo-text">Cafeteria</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Abrir menu de navegação"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre a empresa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#ambiente">Nosso espaço</a></li>
+                    <li class="nav-item"><a class="nav-link" href="produtos.html">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pedidos.html">Pedidos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link nav-admin-link active" href="administrativo.html" title="Painel de controle do gerente">Área Gerência</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina-admin">
+        <div class="container">
+
+            <!-- Banner do Painel Administrativo -->
+            <div class="admin-header">
+                <div>
+                    <span class="small-title">EXCLUSIVO PARA GERENTES</span>
+                    <h1>Administrativo de Pedidos & Atendimento</h1>
+                    <p class="mb-0 text-white-50">
+                        Painel de monitoramento e gestão em tempo real das solicitações no balcão, nas 15 mesas e no delivery.
+                    </p>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-warning text-dark py-2 px-3 fw-bold">Gerente em Operação</span>
+                    <a href="../index.html" class="btn btn-sm btn-outline-light">Ver Site Público</a>
+                </div>
+            </div>
+
+            <!-- Aviso de Escopo Acadêmico -->
+            <div class="alert alert-warning border-start border-4 border-warning mb-4">
+                <strong>🔒 Requisito do Projeto:</strong> Esta página é restrita aos gerentes e não é visível no menu principal dos clientes comuns. No back-end com Spring Boot e IntelliJ, o acesso será autenticado e protegido por perfis de segurança (Spring Security / Role ADMIN) e persistido no banco MySQL.
+            </div>
+
+            <!-- Abas Obrigatórias do Menu: "Em atendimento" e "Finalizados" -->
+            <div class="admin-nav-tabs">
+                <button type="button" class="admin-tab active" data-status="Em atendimento">
+                    ⏳ Em atendimento
+                    <span class="badge rounded-pill" id="count-em-atendimento">0</span>
+                </button>
+
+                <button type="button" class="admin-tab" data-status="Finalizados">
+                    ✅ Finalizados
+                    <span class="badge rounded-pill" id="count-finalizados">0</span>
+                </button>
+            </div>
+
+            <!-- Container onde os pedidos são renderizados via JS -->
+            <div id="container-pedidos-admin">
+                <!-- Renderizado dinamicamente por js/script.js -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Rodapé Principal (Idêntico em todas as páginas) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Cafeteria XV</h3>
+                    <p>
+                        Um espaço para apreciar, conversar e saborear grãos nobres com torra artesanal e confeitaria fina.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="../index.html">Início</a>
+                    <a href="sobre.html">Sobre a empresa</a>
+                    <a href="../index.html#ambiente">Espaço</a>
+                    <a href="produtos.html">Produtos</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="../index.html#contato">Contato</a>
+                    <a href="administrativo.html" class="text-warning">Gerência</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Cafeteria XV. Todos os direitos reservados.</span>
+                <span>Front-end estruturado para futura integração com Spring Boot, Thymeleaf e MySQL.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap e Lógica Central -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
