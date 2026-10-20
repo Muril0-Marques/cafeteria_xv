@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Identidade Visual Cafeteria XV - Marrom, Dourado e Creme */
+    /* Identidade Visual Cafeteria XV - Marrom, Dourado e Creme
+
+    Teste do GIT
+    */
     --marrom-escuro: #23150e;
     --marrom: #3e2316;
     --marrom-medio: #5c3824;
